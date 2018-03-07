@@ -14,6 +14,8 @@ namespace Convolutional_Neural_Network
 
         public Extractor(string layersScheme, List<List<FilterName>> convLayersFilters)
         {
+            m_layers = new List<IExtractLayer>();
+
             for (int i = 0, currentFilterUse = 0; i < layersScheme.Length; i++)
             {
                 switch (layersScheme[i])

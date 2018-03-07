@@ -15,8 +15,8 @@ namespace Convolutional_Neural_Network
 
         public FiltersDB(List<FilterName> filtersToImport)
         {
-            ImportFilters(filtersToImport);
             m_dbFilePath = "filtersDB.txt";
+            ImportFilters(filtersToImport);
         }
 
         private void ImportFilters(List<FilterName> filtersToImport)
@@ -48,7 +48,7 @@ namespace Convolutional_Neural_Network
             {
                 for (int k = 0; k < matrixDim; k++, j++)
                 {
-                    filterMatrix[i, k] = Convert.ToInt32(filter[j]);
+                    filterMatrix[i, k] = Convert.ToInt32(filter[j + 1]);
                 }
             }
 
