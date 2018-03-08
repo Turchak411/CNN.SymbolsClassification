@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Convolutional_Neural_Network
 {
@@ -41,22 +42,38 @@ namespace Convolutional_Neural_Network
             int matrixDimY = matrix.GetLength(0);
             int matrixDimX = matrix.GetLength(1);
 
-            if ((matrixDimY / filter.GetLength(0) == 0) && (matrixDimY / filter.GetLength(0) == 0) && // Проверка вертикали
-                (matrixDimX / filter.GetLength(1) == 0) && (matrixDimX / filter.GetLength(1) == 0))   // Проверка горизонтали
+            if ((matrixDimY % filter.GetLength(0) == 0) && (matrixDimY % filter.GetLength(0) == 0) && // Проверка вертикали
+                (matrixDimX % filter.GetLength(1) == 0) && (matrixDimX % filter.GetLength(1) == 0))   // Проверка горизонтали
             {
-                convoluteMatrix = new double[matrixDimY / filter.GetLength(0), matrixDimX / filter.GetLength(1)];
-
-                for (int i = 0; i < matrixDimY; i++)
+                double[,] newMatrix = null;
+                // Калибровка по вертикали:
+                while (matrix.GetLength(0) % filter.GetLength(0) != 0)
                 {
-                    for (int k = 0; k < matrixDimX; k++)
-                    {
-                        ImposeFilterFrame(matrix, filter, i, k);
-                    }
+                    newMatrix = new double[matrix.GetLength(0) + 1, matrix.GetLength(1)];
+                    Array.Copy(matrix, newMatrix, newMatrix.GetLength(0));
                 }
+
+                matrix = newMatrix;
+
+                // Калибровка по вертикали:
+                while (matrix.GetLength(1) % filter.GetLength(1) != 0)
+                {
+                    newMatrix = new double[matrix.GetLength(0), matrix.GetLength(1) + 1];
+                    Array.Copy(matrix, newMatrix, newMatrix.GetLength(1));
+                }
+
+                matrix = newMatrix;
             }
-            else
+
+            // Свертка:
+            convoluteMatrix = new double[matrixDimY - filter.GetLength(0), matrixDimX - filter.GetLength(1)];
+
+            for (int i = 0; i < matrixDimY - filter.GetLength(0); i++)
             {
-                // TODO: Padding
+                for (int k = 0; k < matrixDimX - filter.GetLength(1); k++)
+                {
+                    convoluteMatrix[i, k] = ImposeFilterFrame(matrix, filter, i, k);
+                }
             }
 
             return convoluteMatrix;

@@ -4,12 +4,12 @@ using System.Windows.Forms;
 
 namespace Convolutional_Neural_Network
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private FileManager m_fileManager;
         private ImageLoader m_imageLoader;
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             Initialize();
@@ -28,7 +28,7 @@ namespace Convolutional_Neural_Network
             {
                 m_imagesInMatrixForm.Add(m_imageLoader.LoadImageData(i.ToString() + ".png"));
             }
-            //  a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z
+                                                                       //  a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z
             double[][] dataSetAnwsers = new double[5][] { new double[26] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                                                           new double[26] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                                                           new double[26] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },

@@ -1,6 +1,6 @@
 ﻿namespace Convolutional_Neural_Network
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
