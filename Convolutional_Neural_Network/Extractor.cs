@@ -63,14 +63,14 @@ namespace Convolutional_Neural_Network
                 {
                     for (int j = 0; j < tempMatrixList[i].GetLength(1); j++, vectorIndex++)
                     {
-                        if (tempMatrixList[i][k, j] < 0.000001)    // TODO: ТАКЖЕ ПОТОМ УБРАТЬ (ДЛЯ УДОБСТВА ОТЛАДКИ)
-                        {
-                            vector[vectorIndex] = 0;
-                        }
-                        else
-                        {
-                            vector[vectorIndex] = tempMatrixList[i][k, j] * 0.01; // TODO: НОРМАЛИЗАЦИЯ (TEST)
-                        }
+                        //if (tempMatrixList[i][k, j] < 0.000001)    // (ДЛЯ УДОБСТВА ОТЛАДКИ)
+                        //{
+                            //vector[vectorIndex] = 0;
+                        //}
+                        //else
+                        //{
+                            vector[vectorIndex] = tempMatrixList[i][k, j] * 0.01; // Нормализация
+                        //}
                     }
                 }
             }

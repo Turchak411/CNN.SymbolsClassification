@@ -19,18 +19,25 @@ namespace Convolutional_Neural_Network
         private void Initialize()
         {
             m_fileManager = new FileManager("memory.txt");
-
-            // Get/create data:
             m_imageLoader = new ImageLoader("images\\", 64, 64);
 
+            // Prepare data to create conv net:
+            string extractorLayersScheme = "cpcp"; // conv-pool-conv-pool (pool = MAXpool)
+            List<List<FilterName>> convFilters = CreateConvFiltersScheme();
+
+            int[] neuronsScheme = new int[4] { 100, 46, 46, 26 };
+            int receptorsNumber = 225;
+
+            m_network = new ConvolutionalNeuralNetwork(extractorLayersScheme, convFilters, neuronsScheme, receptorsNumber, m_fileManager);
+
             // Train network:
-            TrainNet();
+            //TrainNet();
 
             // Save network memory:
             m_network.SaveMemory(m_fileManager);
 
             // Testing - Get anwser:
-            Console.WriteLine("Waiting: [O]");
+            Console.WriteLine("Waiting: [P]");
 
             double[,] data = m_imageLoader.LoadImageData("test.png");
 
@@ -158,17 +165,6 @@ namespace Convolutional_Neural_Network
                 new double[26] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }, // z
                 new double[26] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }
                                                         };
-
-            // Prepare data to create conv net:
-            string extractorLayersScheme = "cpcp"; // conv-pool-conv-pool (pool = MAXpool)
-            List<List<FilterName>> convFilters = CreateConvFiltersScheme();
-
-            // Extractor extractor = new Extractor(extractorLayersScheme, convFilters);
-
-            int[] neuronsScheme = new int[4] { 100, 46, 46, 26 };
-            int receptorsNumber = 225;
-
-            m_network = new ConvolutionalNeuralNetwork(extractorLayersScheme, convFilters, neuronsScheme, receptorsNumber, m_fileManager);
 
             // Train net:
             Console.WriteLine("Training net...");
