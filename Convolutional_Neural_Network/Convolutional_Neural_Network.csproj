@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConvolutionalNetwork.cs" />
     <Compile Include="ConvolutionLayer.cs" />
     <Compile Include="Extractor.cs" />
     <Compile Include="FileManager.cs" />
@@ -60,7 +61,7 @@
     <Compile Include="Layer.cs" />
     <Compile Include="MaxPoolingLayer.cs" />
     <Compile Include="Neuron.cs" />
-    <Compile Include="Neuronet.cs" />
+    <Compile Include="NeuralNetwork.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">

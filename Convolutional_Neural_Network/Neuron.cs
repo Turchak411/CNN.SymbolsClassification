@@ -102,5 +102,12 @@ namespace Convolutional_Neural_Network
             return m_lastAnwser;
         }
 
+        // SAVE MEMORY:
+
+        public void SaveMemory(FileManager fileManager, int layerNumber, int neuronNumber)
+        {
+            fileManager.SaveMemory(layerNumber, neuronNumber, m_weights);
+        }
+
     }
 }

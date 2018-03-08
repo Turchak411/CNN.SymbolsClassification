@@ -96,5 +96,15 @@ namespace Convolutional_Neural_Network
 
             return errors;
         }
+
+        // SAVE MEMORY:
+
+        public void SaveMemory(FileManager fileManager, int layerNumber)
+        {
+            for(int i = 0; i < m_neuronList.Count; i++)
+            {
+                m_neuronList[i].SaveMemory(fileManager, layerNumber, i);
+            }
+        }
     }
 }

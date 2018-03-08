@@ -22,7 +22,7 @@ namespace Convolutional_Neural_Network
                         break;
                     case 'p':
                     default:
-                        CreatePoolLayer(3, 3);      // default: matrix 3x3
+                        CreatePoolLayer(3, 3);      // default: matrix 3x3 // 
                         break;
                 }
             }
@@ -63,7 +63,14 @@ namespace Convolutional_Neural_Network
                 {
                     for (int j = 0; j < tempMatrixList[i].GetLength(1); j++, vectorIndex++)
                     {
-                        vector[vectorIndex] = tempMatrixList[i][k, j];
+                        if (tempMatrixList[i][k, j] < 0.000001)    // TODO: ТАКЖЕ ПОТОМ УБРАТЬ (ДЛЯ УДОБСТВА ОТЛАДКИ)
+                        {
+                            vector[vectorIndex] = 0;
+                        }
+                        else
+                        {
+                            vector[vectorIndex] = tempMatrixList[i][k, j] * 0.01; // TODO: НОРМАЛИЗАЦИЯ (TEST)
+                        }
                     }
                 }
             }

@@ -45,9 +45,25 @@ namespace Convolutional_Neural_Network
             return weights;
         }
 
-        public void SaveMemory()
+        public void PrepareToSaveMemory()
         {
-
+            File.Delete(m_dataPath);
         }
+
+        public void SaveMemory(int layerNumber, int neuronNumber, double[] weights)
+        {
+            using (StreamWriter fileWriter = new StreamWriter(m_dataPath, true))
+            {
+                fileWriter.Write("layer_{0} neuron_{1}", layerNumber, neuronNumber);
+
+                for(int i = 0; i < weights.Length; i++)
+                {
+                    fileWriter.Write(" " + weights[i]);
+                }
+
+                fileWriter.WriteLine("");
+            }
+        }
+
     }
 }

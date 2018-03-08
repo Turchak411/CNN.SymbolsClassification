@@ -2,13 +2,13 @@
 
 namespace Convolutional_Neural_Network
 {
-    public class Neuronet
+    public class NeuralNetwork
     {
-        private List<Layer> m_layerList = new List<Layer>();
+        protected List<Layer> m_layerList = new List<Layer>();
 
-        private Neuronet() { }
+        protected NeuralNetwork() { }
 
-        public Neuronet(int[] neuronsNumberByLayers, int receptorsNumber, FileManager fileManager)
+        public NeuralNetwork(int[] neuronsNumberByLayers, int receptorsNumber, FileManager fileManager)
         {
             Layer firstLayer = new Layer(neuronsNumberByLayers[0], receptorsNumber, 0, fileManager);
             m_layerList.Add(firstLayer);
@@ -59,6 +59,18 @@ namespace Convolutional_Neural_Network
             {
                 m_layerList[i].ChangeWeights(learnSpeed, anwsersFromPrewLayer);
                 anwsersFromPrewLayer = m_layerList[i].GetLastAnwsers();
+            }
+        }
+
+        public void SaveMemory(FileManager fileManager)
+        {
+            // Deleting old memory file:
+            fileManager.PrepareToSaveMemory();
+
+            // Saving
+            for (int i = 0; i < m_layerList.Count; i++)
+            {
+                m_layerList[i].SaveMemory(fileManager, i);
             }
         }
     }
