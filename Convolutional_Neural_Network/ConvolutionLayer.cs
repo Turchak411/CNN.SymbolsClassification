@@ -38,12 +38,10 @@ namespace Convolutional_Neural_Network
 
             // Проверка необходимости падинга 
             // (разрядность обрабатыеваемой матрицы должна делиться на разрядность фильтра без остатка)
-
             int matrixDimY = matrix.GetLength(0);
             int matrixDimX = matrix.GetLength(1);
 
-            if ((matrixDimY % filter.GetLength(0) == 0) && (matrixDimY % filter.GetLength(0) == 0) && // Проверка вертикали
-                (matrixDimX % filter.GetLength(1) == 0) && (matrixDimX % filter.GetLength(1) == 0))   // Проверка горизонтали
+            if ((matrixDimY % filter.GetLength(0) != 0) || (matrixDimX % filter.GetLength(1) != 0))
             {
                 double[,] newMatrix = null;
                 // Калибровка по вертикали:
