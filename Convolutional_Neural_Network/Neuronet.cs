@@ -31,7 +31,12 @@ namespace Convolutional_Neural_Network
 
             // There is one double value at the last handle
 
-            return tempData;
+            return HandleNetAnwser(tempData);
+        }
+
+        private double[] HandleNetAnwser(double[] netResult)
+        {
+            return netResult;
         }
 
         public void Teach(double[] data, double[] rightAnwsersSet, double learnSpeed)

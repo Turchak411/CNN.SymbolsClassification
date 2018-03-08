@@ -59,6 +59,11 @@ namespace Convolutional_Neural_Network
         {
             return m_filtersList[index];
         }
+
+        public int GetFiltersCount()
+        {
+            return m_filtersList.Count;
+        }
     }
 
     public enum FilterName { Relief, EdgeSelection, StrengthenEdge, Blur, Clarity };    // TODO Возможно пересмотреть пару фильтров
