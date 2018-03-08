@@ -66,5 +66,5 @@ namespace Convolutional_Neural_Network
         }
     }
 
-    public enum FilterName { Relief, EdgeSelection, StrengthenEdge, Blur, Clarity };    // TODO Возможно пересмотреть пару фильтров
+    public enum FilterName { Relief, Blur, Clarity };
 }

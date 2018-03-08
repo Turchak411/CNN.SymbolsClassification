@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Convolutional_Neural_Network
 {
@@ -24,7 +25,7 @@ namespace Convolutional_Neural_Network
                 matrixList.Add(MaxPool(inputMatrix[i]));
             }
 
-            return null;
+            return matrixList;
         }
 
         private double[,] MaxPool(double[,] matrix)
@@ -36,11 +37,41 @@ namespace Convolutional_Neural_Network
             if ((matrixDimY % m_handleMatrixDimY != 0) || (matrixDimX % m_handleMatrixDimX != 0))
             {
                 // TODO: Padding
+                double[,] newMatrix = matrix;
+                // Калибровка по вертикали:
+                while (newMatrix.GetLength(0) % m_handleMatrixDimY != 0)
+                {
+                    newMatrix = new double[newMatrix.GetLength(0) + 1, matrix.GetLength(1)];
+                    Array.ConstrainedCopy(matrix, 0, newMatrix, 0, matrixDimY * matrixDimX);
+
+                    // Присвоить новым элементам 0:
+                    for (int i = 0; i < newMatrix.GetLength(1); i++)
+                    {
+                        newMatrix[newMatrix.GetLength(0) - 1, i] = 0;
+                    }
+                }
+
+                matrix = newMatrix;
+
+                // Калибровка по вертикали:
+                while (newMatrix.GetLength(1) % m_handleMatrixDimX != 0)
+                {
+                    newMatrix = new double[matrix.GetLength(0), newMatrix.GetLength(1) + 1];
+                    Array.ConstrainedCopy(matrix, 0, newMatrix, 0, matrixDimY * matrixDimX);
+
+                    // Присвоить новым элементам 0:
+                    for (int k = 0; k < newMatrix.GetLength(0); k++)
+                    {
+                        newMatrix[k, newMatrix.GetLength(1) - 1] = 0;
+                    }
+                }
+
+                matrix = newMatrix;
             }
 
             // Max-Pooling:
-            int pooledMatrixDimY = matrixDimY % m_handleMatrixDimY;
-            int pooledMatrixDimX = matrixDimX % m_handleMatrixDimX;
+            int pooledMatrixDimY = matrixDimY / m_handleMatrixDimY;
+            int pooledMatrixDimX = matrixDimX / m_handleMatrixDimX;
 
             double[,] pooledMatrix = new double[pooledMatrixDimY, pooledMatrixDimX];
 

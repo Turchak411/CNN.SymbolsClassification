@@ -29,7 +29,7 @@ namespace Convolutional_Neural_Network
                 }
             }
 
-            return new List<double[,]>();
+            return convMatrix;
         }
 
         private double[,] ImposeFilter(double[,] matrix, double[,] filter)
@@ -43,21 +43,33 @@ namespace Convolutional_Neural_Network
 
             if ((matrixDimY % filter.GetLength(0) != 0) || (matrixDimX % filter.GetLength(1) != 0))
             {
-                double[,] newMatrix = null;
+                double[,] newMatrix = matrix;
                 // Калибровка по вертикали:
-                while (matrix.GetLength(0) % filter.GetLength(0) != 0)
+                while (newMatrix.GetLength(0) % filter.GetLength(0) != 0)
                 {
-                    newMatrix = new double[matrix.GetLength(0) + 1, matrix.GetLength(1)];
-                    Array.Copy(matrix, newMatrix, newMatrix.GetLength(0));
+                    newMatrix = new double[newMatrix.GetLength(0) + 1, matrix.GetLength(1)];
+                    Array.ConstrainedCopy(matrix, 0, newMatrix, 0, matrixDimY * matrixDimX);
+
+                    // Присвоить новым элементам 0:
+                    for(int i = 0; i < newMatrix.GetLength(1); i++)
+                    {
+                        newMatrix[newMatrix.GetLength(0) - 1, i] = 0;
+                    }
                 }
 
                 matrix = newMatrix;
 
                 // Калибровка по вертикали:
-                while (matrix.GetLength(1) % filter.GetLength(1) != 0)
+                while (newMatrix.GetLength(1) % filter.GetLength(1) != 0)
                 {
-                    newMatrix = new double[matrix.GetLength(0), matrix.GetLength(1) + 1];
-                    Array.Copy(matrix, newMatrix, newMatrix.GetLength(1));
+                    newMatrix = new double[matrix.GetLength(0), newMatrix.GetLength(1) + 1];
+                    Array.ConstrainedCopy(matrix, 0, newMatrix, 0, matrixDimY * matrixDimX);
+
+                    // Присвоить новым элементам 0:
+                    for (int k = 0; k < newMatrix.GetLength(0); k++)
+                    {
+                        newMatrix[k, newMatrix.GetLength(1) - 1] = 0;
+                    }
                 }
 
                 matrix = newMatrix;

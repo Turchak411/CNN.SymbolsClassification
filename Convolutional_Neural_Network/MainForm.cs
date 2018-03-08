@@ -88,9 +88,7 @@ namespace Convolutional_Neural_Network
             List<FilterName> filtersConv0 = new List<FilterName>();
             filtersConv0.Add(FilterName.Blur);
             filtersConv0.Add(FilterName.Clarity);
-            filtersConv0.Add(FilterName.EdgeSelection);
             filtersConv0.Add(FilterName.Relief);
-            filtersConv0.Add(FilterName.StrengthenEdge);
 
             // Conv 1:
             List<FilterName> filtersConv1 = new List<FilterName>();
