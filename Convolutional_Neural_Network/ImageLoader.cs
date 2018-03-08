@@ -8,20 +8,17 @@ namespace Convolutional_Neural_Network
     public class ImageLoader
     {
         // Image data:
-        private string m_imgFolder;
         private int m_imgDimentionX;
         private int m_imgDimentionY;
 
         public ImageLoader()
         {
-            m_imgFolder = "images\\";
             m_imgDimentionX = 32;
             m_imgDimentionY = 32;
         }
 
-        public ImageLoader(string imgFolder, int dimentionX, int dimentionY)
+        public ImageLoader(int dimentionX, int dimentionY)
         {
-            m_imgFolder = imgFolder;
             m_imgDimentionX = dimentionX;
             m_imgDimentionY = dimentionY;
         }
@@ -29,7 +26,7 @@ namespace Convolutional_Neural_Network
         public double[,] LoadImageData(string imgPath)
         {
             // Загрузка и стандартизация изображения:
-            Bitmap img = LoadImage(m_imgFolder + imgPath);
+            Bitmap img = LoadImage(imgPath);
 
             // Приведение изображения к заданынм размерам:
             img = Compress(img);

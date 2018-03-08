@@ -19,7 +19,7 @@ namespace Convolutional_Neural_Network
         private void Initialize()
         {
             m_fileManager = new FileManager("memory.txt");
-            m_imageLoader = new ImageLoader("images\\", 64, 64);
+            m_imageLoader = new ImageLoader(64, 64);
 
             // Prepare data to create conv net:
             string extractorLayersScheme = "cpcp"; // conv-pool-conv-pool (pool = MAXpool)
@@ -37,17 +37,15 @@ namespace Convolutional_Neural_Network
             m_network.SaveMemory(m_fileManager);
 
             // Testing - Get anwser:
-            Console.WriteLine("Waiting: [P]");
+            //double[,] data = m_imageLoader.LoadImageData("test.png");
 
-            double[,] data = m_imageLoader.LoadImageData("test.png");
+            //double[] anwserVector = m_network.Handle(data);
 
-            double[] anwserVector = m_network.Handle(data);
-
-            // Output:
-            foreach(double anwser in anwserVector)
-            {
-                Console.WriteLine("{0:f3}", anwser);
-            }
+            //// Console output:
+            //foreach(double anwser in anwserVector)
+            //{
+            //    Console.WriteLine("{0:f3}", anwser);
+            //}
         }
 
         private void TrainNet()
@@ -56,7 +54,7 @@ namespace Convolutional_Neural_Network
 
             for (int i = 0; i < 78; i++)
             {
-                m_imagesInMatrixForm.Add(m_imageLoader.LoadImageData(i.ToString() + ".png"));
+                m_imagesInMatrixForm.Add(m_imageLoader.LoadImageData("images\\" + i.ToString() + ".png"));
             }
 
             double[][] dataSetAnwsers = new double[78][] {
@@ -173,7 +171,7 @@ namespace Convolutional_Neural_Network
 
             try
             {
-                for (int i = 0; i < 42353; i++) // 64000; i++)      // 42k - 1.5 - 2 hours of training
+                for (int i = 0; i < 42353; i++) // 64000; i++)      // 42k - 1.5 - 2 hours of training (100 iterations of training ~ 17 sec)
                 {
                     // Пересчет величины скорости обучения:
                     learningSpeed = 0.01 * Math.Pow(0.1, i / 150000);
@@ -214,5 +212,36 @@ namespace Convolutional_Neural_Network
 
             return convFilters;
         }
+
+        private void btn_browseImage_Click(object sender, EventArgs e)
+        {
+            openFileDialog_BrowseImage.ShowDialog();
+
+            textBox_imagePath.Text = openFileDialog_BrowseImage.FileName;
+        }
+
+        private void btn_analyze_Click(object sender, EventArgs e)
+        {
+            double[,] data = m_imageLoader.LoadImageData(openFileDialog_BrowseImage.FileName);
+
+            double[] anwserVector = m_network.Handle(data);
+
+            // Reverse sort:
+            Array.Sort(anwserVector);
+            Array.Reverse(anwserVector);
+
+            // Console output:
+            foreach (double anwser in anwserVector)
+            {
+                Console.WriteLine("{0:f3}", anwser);
+            }
+        }
+
+        private void textBox_imagePath_TextChanged(object sender, EventArgs e)
+        {
+            btn_analyze.Enabled = true;
+        }
     }
+
+    public enum Letter { A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z };
 }
