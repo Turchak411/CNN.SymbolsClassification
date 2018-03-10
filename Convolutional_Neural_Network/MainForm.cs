@@ -31,30 +31,16 @@ namespace Convolutional_Neural_Network
             m_network = new ConvolutionalNeuralNetwork(extractorLayersScheme, convFilters, neuronsScheme, receptorsNumber, m_fileManager);
 
             // Train network:
-            //TrainNet();
-
-            // Save network memory:
-            m_network.SaveMemory(m_fileManager);
-
-            // Testing - Get anwser:
-            //double[,] data = m_imageLoader.LoadImageData("test.png");
-
-            //double[] anwserVector = m_network.Handle(data);
-
-            //// Console output:
-            //foreach(double anwser in anwserVector)
-            //{
-            //    Console.WriteLine("{0:f3}", anwser);
-            //}
+            //TrainNet("images");
         }
 
-        private void TrainNet()
+        private void TrainNet(string imageCollectionFolder)
         {
             List<double[,]> m_imagesInMatrixForm = new List<double[,]>();
 
             for (int i = 0; i < 78; i++)
             {
-                m_imagesInMatrixForm.Add(m_imageLoader.LoadImageData("images\\" + i.ToString() + ".png"));
+                m_imagesInMatrixForm.Add(m_imageLoader.LoadImageData(imageCollectionFolder + "\\" + i.ToString() + ".png"));
             }
 
             double[][] dataSetAnwsers = new double[78][] {
@@ -171,7 +157,7 @@ namespace Convolutional_Neural_Network
 
             try
             {
-                for (int i = 0; i < 42353; i++) // 64000; i++)      // 42k - 1.5 - 2 hours of training (100 iterations of training ~ 17 sec)
+                for (int i = 10000; i < 15000; i++) // 64000; i++)      // 100 iterations of training ~ 67 sec
                 {
                     // Пересчет величины скорости обучения:
                     learningSpeed = 0.01 * Math.Pow(0.1, i / 150000);
@@ -182,6 +168,9 @@ namespace Convolutional_Neural_Network
                         m_network.Teach(m_imagesInMatrixForm[k], dataSetAnwsers[k], learningSpeed);
                     }
                 }
+
+                // Save network memory:
+                m_network.SaveMemory(m_fileManager);
 
                 Console.WriteLine("Training success!");
         }
@@ -226,14 +215,19 @@ namespace Convolutional_Neural_Network
 
             double[] anwserVector = m_network.Handle(data);
 
-            // Reverse sort:
-            Array.Sort(anwserVector);
-            Array.Reverse(anwserVector);
+            ResultManager resultManager = new ResultManager();
+            resultManager.AddRange(anwserVector);
 
-            // Console output:
-            foreach (double anwser in anwserVector)
+            // Reverse sort:
+            resultManager.Sort(true);
+
+            // Output:
+            label_results.Text = "";
+            // Console.Clear(); Почему-то ловится exeption
+            for(int i = 0; i < anwserVector.Length; i++)
             {
-                Console.WriteLine("{0:f3}", anwser);
+                Console.WriteLine("{0} - {1:f3}", resultManager.GetResult(i)._letter, resultManager.GetResult(i)._value);
+                label_results.Text += String.Format("{0} - {1:f3}\n", resultManager.GetResult(i)._letter, resultManager.GetResult(i)._value);
             }
         }
 

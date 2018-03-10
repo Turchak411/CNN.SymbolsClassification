@@ -33,6 +33,8 @@
             this.openFileDialog_BrowseImage = new System.Windows.Forms.OpenFileDialog();
             this.btn_analyze = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label_results = new System.Windows.Forms.Label();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_browseImage
@@ -70,18 +72,27 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label_results);
             this.groupBox1.Location = new System.Drawing.Point(12, 106);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(319, 310);
+            this.groupBox1.Size = new System.Drawing.Size(319, 391);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Results:";
+            // 
+            // label_results
+            // 
+            this.label_results.AutoSize = true;
+            this.label_results.Location = new System.Drawing.Point(6, 28);
+            this.label_results.Name = "label_results";
+            this.label_results.Size = new System.Drawing.Size(0, 13);
+            this.label_results.TabIndex = 0;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 421);
+            this.ClientSize = new System.Drawing.Size(344, 509);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btn_analyze);
             this.Controls.Add(this.textBox_imagePath);
@@ -90,7 +101,9 @@
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Convolution Neural Network v0.8";
+            this.Text = "Convolution Neural Network v0.11";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,6 +116,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog_BrowseImage;
         private System.Windows.Forms.Button btn_analyze;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label_results;
     }
 }
 

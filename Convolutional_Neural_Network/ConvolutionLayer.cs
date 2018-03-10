@@ -16,7 +16,6 @@ namespace Convolutional_Neural_Network
 
         public List<double[,]> Handle(List<double[,]> inputMatrix)
         {
-            // TODO: Осуществление свертки и отправка в т. вызова
             List<double[,]> convMatrix = new List<double[,]>();
 
             for (int i = 0; i < inputMatrix.Count; i++)

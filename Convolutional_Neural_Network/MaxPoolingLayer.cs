@@ -36,7 +36,7 @@ namespace Convolutional_Neural_Network
 
             if ((matrixDimY % m_handleMatrixDimY != 0) || (matrixDimX % m_handleMatrixDimX != 0))
             {
-                // TODO: Padding
+                // Padding:
                 double[,] newMatrix = matrix;
                 // Калибровка по вертикали:
                 while (newMatrix.GetLength(0) % m_handleMatrixDimY != 0)
