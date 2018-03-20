@@ -22,7 +22,8 @@ namespace Convolutional_Neural_Network
                         break;
                     case 'p':
                     default:
-                        CreatePoolLayer(3, 3);      // default: matrix 3x3 // 
+                        CreatePoolLayer(2, 2);      // default: matrix 3x3 //
+                        // Для cpcp: при 3х3 выходной вектор получается с длиной - 225, с 2х2 - 1521, но он более вариативен
                         break;
                 }
             }
@@ -65,11 +66,11 @@ namespace Convolutional_Neural_Network
                     {
                         //if (tempMatrixList[i][k, j] < 0.000001)    // (ДЛЯ УДОБСТВА ОТЛАДКИ)
                         //{
-                            //vector[vectorIndex] = 0;
+                        //vector[vectorIndex] = 0;
                         //}
                         //else
                         //{
-                            vector[vectorIndex] = tempMatrixList[i][k, j] * 0.01; // Нормализация
+                        vector[vectorIndex] = tempMatrixList[i][k, j];
                         //}
                     }
                 }

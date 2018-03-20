@@ -34,6 +34,8 @@ namespace Convolutional_Neural_Network
             // Обесцвечивание изображения:
             img = Discolor(img);
 
+            //img.Save("test.png");
+
             // Отцифровка изображения:
             return ConvertToMatrix(img);
         }

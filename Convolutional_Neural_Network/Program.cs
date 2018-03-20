@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace Convolutional_Neural_Network
@@ -16,6 +16,11 @@ namespace Convolutional_Neural_Network
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            // Повышение приоритета процесса
+            //Process ps = Process.GetCurrentProcess();
+            //ps.PriorityClass = ProcessPriorityClass.High;
+
             Application.Run(new MainForm());
         }
     }
